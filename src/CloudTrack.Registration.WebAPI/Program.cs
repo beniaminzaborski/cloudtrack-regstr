@@ -2,7 +2,7 @@ using CloudTrack.Registration.Application;
 using CloudTrack.Registration.Infrastructure;
 using CloudTrack.Registration.WebAPI;
 
-const string serviceName = "Fott-Registration";
+const string serviceName = "CloudTrack-Registration";
 const string serviceVersion = "1.0.0";
 
 var builder = WebApplication.CreateBuilder(args);
