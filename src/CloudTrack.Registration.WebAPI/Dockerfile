@@ -10,6 +10,9 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG NUGET_URL
 ARG NUGET_USERNAME
 
+RUN --mount=type=secret,id=NUGET_PASSWORD \
+	cat /run/secrets/NUGET_PASSWORD
+
 WORKDIR /src
 COPY ["src/CloudTrack.Registration.WebAPI/CloudTrack.Registration.WebAPI.csproj", "src/CloudTrack.Registration.WebAPI/"]
 COPY ["src/CloudTrack.Registration.Application/CloudTrack.Registration.Application.csproj", "src/CloudTrack.Registration.Application/"]
