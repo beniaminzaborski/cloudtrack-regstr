@@ -74,9 +74,9 @@ jobs:
         context: .
         file: ./src/CloudTrack.Registration.WebAPI/Dockerfile
         build-args: |
-          NUGET_URL=${{ vars.NUGET_FEED_URL }}
-          NUGET_USERNAME=${{ env.NUGET_USERNAME }}
-          NUGET_PASSWORD=${{ secrets.NUGET_TOKEN }}
+          "NUGET_URL=${{vars.NUGET_FEED_URL}}"
+          "NUGET_USERNAME=${{env.NUGET_USERNAME}}"
+          "NUGET_PASSWORD=${{secrets.NUGET_TOKEN}}"
         push: true
         tags: ${{ steps.metadata.outputs.tags }}
         labels: ${{ steps.metadata.outputs.labels }}
