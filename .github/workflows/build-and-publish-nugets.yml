@@ -1,0 +1,51 @@
+name: Build & publish NuGet packages
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+    - 'src/Shared/CloudTrack.Registrations.Messaging/**'
+
+env:
+  NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+  NUGET_DIRECTORY: ${{ github.workspace}}/nuget
+  NUGET_FEED_URL: ${{ vars.NUGET_FEED_URL }}
+  DOTNET_VERSION: 9.0.x
+
+jobs:
+  create_nuget:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@main
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - run: dotnet pack src/Shared/CloudTrack.Registrations.Messaging/CloudTrack.Registrations.Messaging.csproj --configuration Release --output ${{ env.NUGET_DIRECTORY }}
+    
+    - uses: actions/upload-artifact@v4
+      with:
+        name: nuget
+        if-no-files-found: error
+        retention-days: 3
+        path: ${{ env.NUGET_DIRECTORY }}/*.nupkg
+
+  deploy_nuget:
+    runs-on: ubuntu-latest
+    needs: [ create_nuget ]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: nuget
+          path: ${{ env.NUGET_DIRECTORY }}
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+
+      - name: Publish NuGet package
+        run: |
+          dotnet nuget push "${{ env.NUGET_DIRECTORY }}/CloudTrack.Registrations.Messaging.*.nupkg" --api-key "${{ env.NUGET_TOKEN }}" --source ${{ env.NUGET_FEED_URL }} --skip-duplicate
+

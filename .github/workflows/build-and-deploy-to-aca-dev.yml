@@ -1,0 +1,34 @@
+name: Build & deploy service in dev
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+    - main
+    paths-ignore:
+    - 'src/Shared/**'
+    - 'README.ME'
+    - 'doc/**'
+    - 'test/**'
+
+jobs:
+  build-service-in-dev:
+    uses: ./.github/workflows/.script-build-service-docker-image-and-push-into-acr.yml
+    with:
+      ENVIRONMENT_TYPE: dev
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+
+  deploy-service-in-dev:
+    uses: ./.github/workflows/.script-deploy-service-into-aca.yml
+    needs: build-service-in-dev
+    with:
+      ENVIRONMENT_TYPE: dev
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}

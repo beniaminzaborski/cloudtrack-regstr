@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E49C4B9E-C459-4FB1-A6BE-34A24372463D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{329A9A35-1BA0-442C-A027-2FD4A3AB00F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{99278D72-7943-4BD4-8212-0214AFFE692B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{B477D188-76D9-4CED-BE07-21B37A592C94}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\.script-build-service-docker-image-and-push-into-acr.yml = .github\workflows\.script-build-service-docker-image-and-push-into-acr.yml
+		.github\workflows\.script-deploy-service-into-aca.yml = .github\workflows\.script-deploy-service-into-aca.yml
+		.github\workflows\build-and-deploy-to-aca-dev.yml = .github\workflows\build-and-deploy-to-aca-dev.yml
+		.github\workflows\build-and-publish-nugets.yml = .github\workflows\build-and-publish-nugets.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BCBD1EB6-3008-41E9-837A-D95005D921EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTrack.Registration.Messaging", "src\Shared\CloudTrack.Registration.Messaging\CloudTrack.Registration.Messaging.csproj", "{D2EA8EF9-A33D-4FB7-9F7E-CFFF70EB8D57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTrack.Registration.Application", "src\CloudTrack.Registration.Application\CloudTrack.Registration.Application.csproj", "{A8448B7E-36CF-4DE2-BDFD-6107918BCE49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTrack.Registration.Domain", "src\CloudTrack.Registration.Domain\CloudTrack.Registration.Domain.csproj", "{9CE5CA24-2735-4D8D-946F-AD0956D68004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTrack.Registration.Infrastructure", "src\CloudTrack.Registration.Infrastructure\CloudTrack.Registration.Infrastructure.csproj", "{419C2567-4012-4290-A029-C000E7890D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTrack.Registration.NumberAssignatorAzFunction", "src\CloudTrack.Registration.NumberAssignatorAzFunction\CloudTrack.Registration.NumberAssignatorAzFunction.csproj", "{8DFD8EE2-3BD0-4578-8233-67B083036728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudTrack.Registration.WebAPI", "src\CloudTrack.Registration.WebAPI\CloudTrack.Registration.WebAPI.csproj", "{6871A26D-EBA6-4265-B27C-6F0CAE87A2B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2EA8EF9-A33D-4FB7-9F7E-CFFF70EB8D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2EA8EF9-A33D-4FB7-9F7E-CFFF70EB8D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2EA8EF9-A33D-4FB7-9F7E-CFFF70EB8D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2EA8EF9-A33D-4FB7-9F7E-CFFF70EB8D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8448B7E-36CF-4DE2-BDFD-6107918BCE49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8448B7E-36CF-4DE2-BDFD-6107918BCE49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8448B7E-36CF-4DE2-BDFD-6107918BCE49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8448B7E-36CF-4DE2-BDFD-6107918BCE49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE5CA24-2735-4D8D-946F-AD0956D68004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE5CA24-2735-4D8D-946F-AD0956D68004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE5CA24-2735-4D8D-946F-AD0956D68004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE5CA24-2735-4D8D-946F-AD0956D68004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{419C2567-4012-4290-A029-C000E7890D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{419C2567-4012-4290-A029-C000E7890D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{419C2567-4012-4290-A029-C000E7890D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{419C2567-4012-4290-A029-C000E7890D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFD8EE2-3BD0-4578-8233-67B083036728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFD8EE2-3BD0-4578-8233-67B083036728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFD8EE2-3BD0-4578-8233-67B083036728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFD8EE2-3BD0-4578-8233-67B083036728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6871A26D-EBA6-4265-B27C-6F0CAE87A2B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6871A26D-EBA6-4265-B27C-6F0CAE87A2B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6871A26D-EBA6-4265-B27C-6F0CAE87A2B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6871A26D-EBA6-4265-B27C-6F0CAE87A2B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B477D188-76D9-4CED-BE07-21B37A592C94} = {99278D72-7943-4BD4-8212-0214AFFE692B}
+		{BCBD1EB6-3008-41E9-837A-D95005D921EF} = {329A9A35-1BA0-442C-A027-2FD4A3AB00F5}
+		{D2EA8EF9-A33D-4FB7-9F7E-CFFF70EB8D57} = {BCBD1EB6-3008-41E9-837A-D95005D921EF}
+		{A8448B7E-36CF-4DE2-BDFD-6107918BCE49} = {329A9A35-1BA0-442C-A027-2FD4A3AB00F5}
+		{9CE5CA24-2735-4D8D-946F-AD0956D68004} = {329A9A35-1BA0-442C-A027-2FD4A3AB00F5}
+		{419C2567-4012-4290-A029-C000E7890D01} = {329A9A35-1BA0-442C-A027-2FD4A3AB00F5}
+		{8DFD8EE2-3BD0-4578-8233-67B083036728} = {329A9A35-1BA0-442C-A027-2FD4A3AB00F5}
+		{6871A26D-EBA6-4265-B27C-6F0CAE87A2B5} = {329A9A35-1BA0-442C-A027-2FD4A3AB00F5}
+	EndGlobalSection
+EndGlobal

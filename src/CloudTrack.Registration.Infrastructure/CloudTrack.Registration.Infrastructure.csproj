@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentMigrator" Version="6.2.0" />
+    <PackageReference Include="FluentMigrator.Runner" Version="6.2.0" />
+    <PackageReference Include="FluentMigrator.Runner.Postgres" Version="6.2.0" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
+    <PackageReference Include="Scrutor" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CloudTrack.Registration.Application\CloudTrack.Registration.Application.csproj" />
+    <ProjectReference Include="..\CloudTrack.Registration.Domain\CloudTrack.Registration.Domain.csproj" />
+  </ItemGroup>
+</Project>

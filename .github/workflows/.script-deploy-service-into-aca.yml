@@ -1,0 +1,61 @@
+on:
+  workflow_call: 
+    inputs:
+      ENVIRONMENT_TYPE:
+        required: true
+        type: string
+    secrets:
+      AZURE_CREDENTIALS:
+        required: true
+      REGISTRY_LOGIN_SERVER:
+        required: true
+      REGISTRY_USERNAME:
+        required: true
+      REGISTRY_PASSWORD:
+        required: true
+
+env:
+  PROJECT_NAME: cloudtrack
+  SERVICE_NAME: regstr
+
+jobs:
+  deploy-service-into-aca:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT_TYPE }}
+    steps:
+    # Log in to Azure
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    # Determine a docker image version (as docker image tag) depends on how the workflow has been triggered
+    # For trigger by push a commit then docker image tag is github sha
+    # For trigger by git tag (v{major.minor.fix}) then docker image tag is {major.minor.fix}
+    # This step sets these tags as a step output: steps.metadata.outputs.tags
+    - name: Determine Docker image metadata
+      id: metadata
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }}
+        flavor: |
+          latest=false
+        tags: |
+          type=semver,pattern={{version}}
+          type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
+
+    # Create the new revision in Azure Container App
+    - name: Deploy to Azure Container App
+      run: |
+        # Determine resource group name depending on environment
+        if [[ "${{ inputs.ENVIRONMENT_TYPE }}" == "uat" || "${{ inputs.ENVIRONMENT_TYPE }}" == "prod" ]]; then
+        RG="rg-${{ env.PROJECT_NAME }}-prod"
+        else
+        RG="rg-${{ env.PROJECT_NAME }}-nonprod"
+        fi
+
+        # Perform the deployment
+        az containerapp update \
+        --name ca-${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }}-${{ inputs.ENVIRONMENT_TYPE }} \
+        --resource-group "$RG" \
+        --image "${{ steps.metadata.outputs.tags }}"
