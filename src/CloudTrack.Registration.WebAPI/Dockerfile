@@ -6,9 +6,11 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+
 ARG NUGET_URL
 ARG NUGET_USERNAME
 ARG NUGET_PASSWORD
+
 WORKDIR /src
 COPY ["src/CloudTrack.Registration.WebAPI/CloudTrack.Registration.WebAPI.csproj", "src/CloudTrack.Registration.WebAPI/"]
 COPY ["src/CloudTrack.Registration.Application/CloudTrack.Registration.Application.csproj", "src/CloudTrack.Registration.Application/"]
