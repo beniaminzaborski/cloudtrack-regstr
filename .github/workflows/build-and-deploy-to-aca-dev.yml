@@ -21,6 +21,7 @@ jobs:
       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+      NUGET_PASSWORD: ${{ secrets.NUGET_TOKEN }}
 
   deploy-service-in-dev:
     uses: ./.github/workflows/.script-deploy-service-into-aca.yml

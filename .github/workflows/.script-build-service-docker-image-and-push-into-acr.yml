@@ -13,6 +13,8 @@ on:
         required: true
       REGISTRY_PASSWORD:
         required: true
+      NUGET_PASSWORD:
+        required: true
 
 env:
   PROJECT_NAME: cloudtrack
@@ -76,8 +78,7 @@ jobs:
         build-args: |
           NUGET_URL=${{ vars.NUGET_FEED_URL }}
           NUGET_USERNAME=${{ env.NUGET_USERNAME }}
-        secrets: |
-          "NUGET_PASSWORD=${{ secrets.NUGET_TOKEN }}"
+          NUGET_PASSWORD=${{ secrets.NUGET_PASSWORD }}
         push: true
         tags: ${{ steps.metadata.outputs.tags }}
         labels: ${{ steps.metadata.outputs.labels }}
