@@ -14,7 +14,7 @@ COPY ["src/CloudTrack.Registration.WebAPI/CloudTrack.Registration.WebAPI.csproj"
 COPY ["src/CloudTrack.Registration.Application/CloudTrack.Registration.Application.csproj", "src/CloudTrack.Registration.Application/"]
 COPY ["src/CloudTrack.Registration.Domain/CloudTrack.Registration.Domain.csproj", "src/CloudTrack.Registration.Domain/"]
 COPY ["src/CloudTrack.Registration.Infrastructure/CloudTrack.Registration.Infrastructure.csproj", "src/CloudTrack.Registration.Infrastructure/"]
-RUN dotnet nuget add source $NUGET_URL -n beniamin_github -u $NUGET_USERNAME -p $NUGET_PASSWORD --store-password-in-clear-text
+RUN dotnet nuget add source $NUGET_URL -n beniamin_github -u $NUGET_USERNAME -p "$NUGET_PASSWORD" --store-password-in-clear-text
 RUN dotnet restore "src/CloudTrack.Registration.WebAPI/CloudTrack.Registration.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/src/CloudTrack.Registration.WebAPI"

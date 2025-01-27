@@ -68,18 +68,15 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     # Build and push the docker image into the container registry
-    # - name: Build and push Docker image
-    #   uses: docker/build-push-action@v5
-    #   with:
-    #     context: .
-    #     file: ./src/CloudTrack.Registration.WebAPI/Dockerfile
-    #     build-args: |
-    #       NUGET_URL=${{vars.NUGET_FEED_URL}}
-    #       NUGET_USERNAME=${{env.NUGET_USERNAME}}
-    #       NUGET_PASSWORD=${{secrets.NUGET_TOKEN}}
-    #     push: true
-    #     tags: ${{ steps.metadata.outputs.tags }}
-    #     labels: ${{ steps.metadata.outputs.labels }}
-    - run: |
-       docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }}:${{ github.sha }} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }}:latest --build-arg NUGET_URL=${{ vars.NUGET_FEED_URL }} --build-arg NUGET_USERNAME=${{ env.NUGET_USERNAME }} --build-arg NUGET_PASSWORD=${{ secrets.NUGET_TOKEN }} -f ./src/CloudTrack.Registration.WebAPI/Dockerfile
-       docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }} --all-tags
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./src/CloudTrack.Registration.WebAPI/Dockerfile
+        build-args: |
+          NUGET_URL=${{ vars.NUGET_FEED_URL }}
+          NUGET_USERNAME=${{ env.NUGET_USERNAME }}
+          NUGET_PASSWORD=${{ secrets.NUGET_TOKEN }}
+        push: true
+        tags: ${{ steps.metadata.outputs.tags }}
+        labels: ${{ steps.metadata.outputs.labels }}
