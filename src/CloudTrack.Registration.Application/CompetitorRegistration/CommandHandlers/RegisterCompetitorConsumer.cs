@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 
 namespace CloudTrack.Registration.Application.CompetitorRegistration;
-
+/*
 public class RegisterCompetitorConsumer(ILogger<RegisterCompetitorConsumer> logger) : IConsumer<RegisterCompetitor>
 {
     private readonly ILogger<RegisterCompetitorConsumer> _logger = logger;
@@ -34,3 +34,4 @@ public class RegisterCompetitorConsumer(ILogger<RegisterCompetitorConsumer> logg
         //}
     }
 }
+*/
