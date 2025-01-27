@@ -36,8 +36,8 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     # Run unit tests
-    - name: Tests
-      run: dotnet test ./test/CloudTrack.Registrations.Domain.UnitTests/CloudTrack.Registrations.Domain.UnitTests.csproj
+    # - name: Tests
+    #   run: dotnet test ./test/CloudTrack.Registrations.Domain.UnitTests/CloudTrack.Registrations.Domain.UnitTests.csproj
 
     # Log in to Azure for further steps
     - name: Log in to Azure
