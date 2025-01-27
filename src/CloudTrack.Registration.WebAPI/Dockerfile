@@ -10,15 +10,15 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG NUGET_URL
 ARG NUGET_USERNAME
 
-RUN --mount=type=secret,id=NUGET_PASSWORD \
-  cat /run/secrets/NUGET_PASSWORD
-
 WORKDIR /src
 COPY ["src/CloudTrack.Registration.WebAPI/CloudTrack.Registration.WebAPI.csproj", "src/CloudTrack.Registration.WebAPI/"]
 COPY ["src/CloudTrack.Registration.Application/CloudTrack.Registration.Application.csproj", "src/CloudTrack.Registration.Application/"]
 COPY ["src/CloudTrack.Registration.Domain/CloudTrack.Registration.Domain.csproj", "src/CloudTrack.Registration.Domain/"]
 COPY ["src/CloudTrack.Registration.Infrastructure/CloudTrack.Registration.Infrastructure.csproj", "src/CloudTrack.Registration.Infrastructure/"]
-RUN dotnet nuget add source --username $NUGET_USERNAME --password $(cat /run/secrets/NUGET_PASSWORD) --store-password-in-clear-text --name beniamin_github "$NUGET_URL"
+
+RUN --mount=type=secret,id=NUGET_PASSWORD \
+	dotnet nuget add source --username $NUGET_USERNAME --password $(cat /run/secrets/NUGET_PASSWORD) --store-password-in-clear-text --name beniamin_github "$NUGET_URL"
+
 RUN dotnet restore "src/CloudTrack.Registration.WebAPI/CloudTrack.Registration.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/src/CloudTrack.Registration.WebAPI"
