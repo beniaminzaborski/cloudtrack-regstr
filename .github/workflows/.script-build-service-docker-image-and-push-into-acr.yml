@@ -19,7 +19,6 @@ env:
   SERVICE_NAME: regstr
   DOTNET_VERSION: 9.0.x
   NUGET_USERNAME: beniaminzaborski
-  NUGET_PASSWORD: thefake
 
 jobs:
   build-service-docker-image-and-push-into-acr:
@@ -77,8 +76,8 @@ jobs:
         build-args: |
           NUGET_URL=${{ vars.NUGET_FEED_URL }}
           NUGET_USERNAME=${{ env.NUGET_USERNAME }}
-          #NUGET_PASSWORD=${{ secrets.NUGET_TOKEN }}
-          NUGET_PASSWORD=${{ env.NUGET_PASSWORD }}
+        secrets: |
+          "NUGET_PASSWORD=${{ secrets.NUGET_TOKEN }}"
         push: true
         tags: ${{ steps.metadata.outputs.tags }}
         labels: ${{ steps.metadata.outputs.labels }}
