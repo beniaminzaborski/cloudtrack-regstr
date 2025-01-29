@@ -1,4 +1,4 @@
-name: Build & deploy service in dev
+name: Build & deploy function in dev
 
 on:
   workflow_dispatch: {}
