@@ -8,19 +8,13 @@ using Microsoft.Azure.Functions.Worker;
 
 namespace CloudTrack.Registration.NumberAssignatorAzFunction;
 
-public class NumberAssignatorFunction
+public class NumberAssignatorFunction(
+    IMessageReceiver receiver,
+    ILogger<NumberAssignatorFunction> logger)
 {
     public const string QueueName = "register-competitor";
-    readonly IMessageReceiver _receiver;
-    readonly ILogger<NumberAssignatorFunction> _logger;
-
-    public NumberAssignatorFunction(
-        IMessageReceiver receiver,
-        ILogger<NumberAssignatorFunction> logger)
-    {
-        _receiver = receiver;
-        _logger = logger;
-    }
+    readonly IMessageReceiver _receiver = receiver;
+    readonly ILogger<NumberAssignatorFunction> _logger = logger;
 
     [Function("NumberAssignatorFunction")]
     public async Task Run(

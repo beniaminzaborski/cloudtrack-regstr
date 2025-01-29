@@ -4,6 +4,15 @@ on:
       ENVIRONMENT_TYPE:
         required: true
         type: string
+      PROJECT_NAME:
+        required: true
+        type: string
+      SERVICE_NAME:
+        required: true
+        type: string
+      DOCKERFILE_PATH:
+        required: true
+        type: string
     secrets:
       AZURE_CREDENTIALS:
         required: true
@@ -17,8 +26,6 @@ on:
         required: true
 
 env:
-  PROJECT_NAME: cloudtrack
-  SERVICE_NAME: regstr
   DOTNET_VERSION: 9.0.x
   NUGET_USERNAME: beniaminzaborski
 
@@ -55,7 +62,7 @@ jobs:
       id: metadata
       uses: docker/metadata-action@v5
       with:
-        images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }}
+        images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ inputs.PROJECT_NAME }}-${{ inputs.SERVICE_NAME }}
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
@@ -74,7 +81,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         context: .
-        file: ./src/CloudTrack.Registration.WebAPI/Dockerfile
+        file: ${{ inputs.DOCKERFILE_PATH }}
         build-args: |
           NUGET_URL=${{ vars.NUGET_FEED_URL }}
           NUGET_USERNAME=${{ env.NUGET_USERNAME }}

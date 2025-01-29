@@ -4,6 +4,12 @@ on:
       ENVIRONMENT_TYPE:
         required: true
         type: string
+      PROJECT_NAME:
+        required: true
+        type: string
+      SERVICE_NAME:
+        required: true
+        type: string
     secrets:
       AZURE_CREDENTIALS:
         required: true
@@ -13,10 +19,6 @@ on:
         required: true
       REGISTRY_PASSWORD:
         required: true
-
-env:
-  PROJECT_NAME: cloudtrack
-  SERVICE_NAME: regstr
 
 jobs:
   deploy-service-into-aca:
@@ -37,7 +39,7 @@ jobs:
       id: metadata
       uses: docker/metadata-action@v5
       with:
-        images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }}
+        images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ inputs.PROJECT_NAME }}-${{ inputs.SERVICE_NAME }}
         flavor: |
           latest=false
         tags: |
@@ -49,13 +51,13 @@ jobs:
       run: |
         # Determine resource group name depending on environment
         if [[ "${{ inputs.ENVIRONMENT_TYPE }}" == "uat" || "${{ inputs.ENVIRONMENT_TYPE }}" == "prod" ]]; then
-        RG="rg-${{ env.PROJECT_NAME }}-prod"
+        RG="rg-${{ inputs.PROJECT_NAME }}-prod"
         else
-        RG="rg-${{ env.PROJECT_NAME }}-nonprod"
+        RG="rg-${{ inputs.PROJECT_NAME }}-nonprod"
         fi
 
         # Perform the deployment
         az containerapp update \
-        --name ca-${{ env.PROJECT_NAME }}-${{ env.SERVICE_NAME }}-${{ inputs.ENVIRONMENT_TYPE }} \
+        --name ca-${{ inputs.PROJECT_NAME }}-${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT_TYPE }} \
         --resource-group "$RG" \
         --image "${{ steps.metadata.outputs.tags }}"

@@ -4,14 +4,9 @@ using System.Threading.Tasks;
 
 namespace CloudTrack.Registration.NumberAssignatorAzFunction.Consumers;
 
-public class RegisterCompetitorConsumer : IConsumer<RegisterCompetitor>
+public class RegisterCompetitorConsumer(ICompetitorService competitorService) : IConsumer<RegisterCompetitor>
 {
-    private readonly ICompetitorService _competitorService;
-
-    public RegisterCompetitorConsumer(ICompetitorService competitorService)
-    {
-        _competitorService = competitorService;
-    }
+    private readonly ICompetitorService _competitorService = competitorService;
 
     public async Task Consume(ConsumeContext<RegisterCompetitor> context)
     {

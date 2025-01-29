@@ -7,14 +7,9 @@ using System.Threading.Tasks;
 
 namespace CloudTrack.Registration.NumberAssignatorAzFunction;
 
-internal class CompetitorService : ICompetitorService
+internal class CompetitorService(ILogger<CompetitorService> logger) : ICompetitorService
 {
-    readonly ILogger<CompetitorService> _logger;
-
-    public CompetitorService(ILogger<CompetitorService> logger)
-    {
-        _logger = logger;
-    }
+    readonly ILogger<CompetitorService> _logger = logger;
 
     public async Task<(Guid id, string number)> RegisterCompetitorAndReturnNumber(RegisterCompetitor competitor)
     {
