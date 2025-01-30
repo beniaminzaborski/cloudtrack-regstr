@@ -67,6 +67,7 @@ jobs:
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
           type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
+          type=raw,value=latest
 
     # Log in to Azure Container Registry to push the docker image into it in the further step
     - name: Log in to Azure Container Registry
