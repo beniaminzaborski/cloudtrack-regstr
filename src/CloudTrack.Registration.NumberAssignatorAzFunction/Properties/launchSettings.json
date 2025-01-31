@@ -2,14 +2,17 @@
   "profiles": {
     "Bz.Fott.Registration.NumberAssignatorAzFunction": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7181"
+      "commandLineArgs": "--port 7181",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ServiceBusConnectionString": "",
+        "PostgresConnectionString": ""
+      }
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "containerRunArguments": "--init",
-      "httpPort": 30376,
-      "useSSL": false
+      "launchBrowser": false
     }
   }
 }
