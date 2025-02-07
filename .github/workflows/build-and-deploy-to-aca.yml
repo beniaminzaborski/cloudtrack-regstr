@@ -1,4 +1,4 @@
-name: Build & deploy function in dev
+name: Build & deploy service
 
 on:
   workflow_dispatch: {}
@@ -12,13 +12,13 @@ on:
     - 'test/**'
 
 jobs:
-  build-service-in-dev:
+  build-service:
     uses: ./.github/workflows/.script-build-service-docker-image-and-push-into-acr.yml
     with:
-      ENVIRONMENT_TYPE: dev
+      ENVIRONMENT_TYPE: demo
       PROJECT_NAME: cloudtrack
-      SERVICE_NAME: regstr-func
-      DOCKERFILE_PATH: ./src/CloudTrack.Registration.NumberAssignatorAzFunction/Dockerfile
+      SERVICE_NAME: regstr
+      DOCKERFILE_PATH: ./src/CloudTrack.Registration.WebAPI/Dockerfile
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
@@ -26,13 +26,14 @@ jobs:
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       NUGET_PASSWORD: ${{ secrets.NUGET_TOKEN }}
 
-  deploy-service-in-dev:
+  deploy-service:
     uses: ./.github/workflows/.script-deploy-service-into-aca.yml
-    needs: build-service-in-dev
+    needs: build-service
     with:
-      ENVIRONMENT_TYPE: dev
+      ENVIRONMENT_TYPE: demo
+      RESOURCE_GROUP: ${{ vars.AZURE_GROUP }}
       PROJECT_NAME: cloudtrack
-      SERVICE_NAME: regstr-func
+      SERVICE_NAME: regstr
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
       REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}

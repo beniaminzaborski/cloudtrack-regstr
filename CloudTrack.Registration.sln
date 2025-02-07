@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\.script-build-service-docker-image-and-push-into-acr.yml = .github\workflows\.script-build-service-docker-image-and-push-into-acr.yml
 		.github\workflows\.script-deploy-service-into-aca.yml = .github\workflows\.script-deploy-service-into-aca.yml
-		.github\workflows\build-and-deploy-func-to-aca-dev.yml = .github\workflows\build-and-deploy-func-to-aca-dev.yml
-		.github\workflows\build-and-deploy-to-aca-dev.yml = .github\workflows\build-and-deploy-to-aca-dev.yml
 		.github\workflows\build-and-publish-nugets.yml = .github\workflows\build-and-publish-nugets.yml
+		.github\workflows\build-and-deploy-func-to-aca.yml = .github\workflows\build-and-deploy-func-to-aca.yml
+		.github\workflows\build-and-deploy-to-aca.yml = .github\workflows\build-and-deploy-to-aca.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BCBD1EB6-3008-41E9-837A-D95005D921EF}"

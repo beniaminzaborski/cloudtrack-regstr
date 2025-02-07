@@ -4,6 +4,9 @@ on:
       ENVIRONMENT_TYPE:
         required: true
         type: string
+      RESOURCE_GROUP:
+        required: true
+        type: string
       PROJECT_NAME:
         required: true
         type: string
@@ -48,15 +51,7 @@ jobs:
     # Create the new revision in Azure Container App
     - name: Deploy to Azure Container App
       run: |
-        # Determine resource group name depending on environment
-        if [[ "${{ inputs.ENVIRONMENT_TYPE }}" == "uat" || "${{ inputs.ENVIRONMENT_TYPE }}" == "prod" ]]; then
-        RG="rg-${{ inputs.PROJECT_NAME }}-prod"
-        else
-        RG="rg-${{ inputs.PROJECT_NAME }}-nonprod"
-        fi
-
-        # Perform the deployment
         az containerapp update \
         --name ca-${{ inputs.PROJECT_NAME }}-${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT_TYPE }} \
-        --resource-group "$RG" \
+        --resource-group "${{ inputs.RESOURCE_GROUP }}" \
         --image "${{ steps.metadata.outputs.tags }}"
