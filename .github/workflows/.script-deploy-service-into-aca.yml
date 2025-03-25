@@ -13,6 +13,9 @@ on:
       SERVICE_NAME:
         required: true
         type: string
+      RESOURCE_PREFIX:
+        required: true
+        type: string
     secrets:
       AZURE_CREDENTIALS:
         required: true
@@ -52,6 +55,6 @@ jobs:
     - name: Deploy to Azure Container App
       run: |
         az containerapp update \
-        --name ca-${{ inputs.PROJECT_NAME }}-${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT_TYPE }} \
+        --name ${{ inputs.RESOURCE_PREFIX }}-${{ inputs.PROJECT_NAME }}-${{ inputs.SERVICE_NAME }}-${{ inputs.ENVIRONMENT_TYPE }} \
         --resource-group "${{ inputs.RESOURCE_GROUP }}" \
         --image "${{ steps.metadata.outputs.tags }}"
